@@ -1,6 +1,10 @@
 package edu.ap.jaxrs;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
+import java.time.Month;
+import java.time.Year;
+import java.util.Date;
 
 import javax.ws.rs.*;
 import javax.json.*;
@@ -61,7 +65,7 @@ public class ExamenResource {
 	public String addExamen(String examenJSON) {
 		String returnCode = "";
 		try {
-			// read existing products
+			// read existing exams
 			InputStream fis = new FileInputStream(FILE);
 	        JsonReader jsonReader1 = Json.createReader(fis);
 	        JsonObject jsonObject = jsonReader1.readObject();
@@ -76,12 +80,22 @@ public class ExamenResource {
 	        JsonArrayBuilder arrBuilder = Json.createArrayBuilder();
 	        
 	        for(int i = 0; i < array.size(); i++){
-	        	// add existing examens
+	        	// add existing exams
 	        	JsonObject obj = array.getJsonObject(i);
 	        	arrBuilder.add(obj);
 	        }
+	        
+	        //Date date = format.parse(new Date());
+	        //var today = new Date();
+	        //today = today.getDate() + '-' + today.getMonth()+'-'+today.getYear();
+	        //SimpleDateFormat format = new SimpleDateFormat("DD-mm-YYYY");
+	        
+	        //newObject.put("datum", format.parse(today));
+	        
+	        
 	        // add new product
 	        arrBuilder.add(newObject);
+	        
 	        
 	        // now wrap it in a JSON object
 	        JsonArray newArray = arrBuilder.build();
